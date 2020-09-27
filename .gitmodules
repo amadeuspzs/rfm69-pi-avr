@@ -1,4 +1,0 @@
-[submodule "RFM69-pi"]
-	path = RFM69-pi
-	url = https://github.com/amadeuspzs/RFM69-pi
-	branch = master
