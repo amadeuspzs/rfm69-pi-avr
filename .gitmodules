@@ -1,0 +1,3 @@
+[submodule "hub-pi"]
+	path = hub-pi
+	url = https://github.com/amadeuspzs/RFM69-pi
