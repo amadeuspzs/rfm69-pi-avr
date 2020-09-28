@@ -59,7 +59,7 @@ byte sendSize=0;
 boolean requestACK = true;
 
 typedef struct {
-  int           nodeId; //store this nodeId
+  //int           nodeId; //store this nodeId
   unsigned long uptime; //uptime in ms
   float         temp;   //temperature maybe?
 } Payload;
@@ -79,7 +79,7 @@ void setup() {
 
 void loop() {
   //fill in the struct with new values
-  theData.nodeId = NODEID;
+  //theData.nodeId = NODEID;
   theData.uptime = millis();
   theData.temp = 99.99; //it's hot!
   
