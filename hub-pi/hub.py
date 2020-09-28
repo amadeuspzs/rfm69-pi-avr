@@ -4,23 +4,12 @@ import time
 
 node_id = 1
 network_id = 1
+#encryptKey = "sampleEncryptKey"
 
-with Radio(FREQ_433MHZ, node_id, network_id, isHighPower=False, verbose=True, encryptionKey="sampleEncryptKey") as radio:
-    print ("Starting loop...")
-
-    rx_counter = 0
-
+#with Radio(FREQ_433MHZ, node_id, network_id, isHighPower=False, verbose=True, encryptionKey=encryptKey) as radio:
+with Radio(FREQ_433MHZ, node_id, network_id, isHighPower=False, verbose=False) as radio:
     while True:
-
-        # Every 10 seconds get packets
-        if rx_counter > 10:
-            rx_counter = 0
-
-            # Process packets
-            for packet in radio.get_packets():
-                print (packet)
-
-        print("Listening...", len(radio.packets), radio.mode_name)
-        delay = 0.5
-        rx_counter += delay
-        time.sleep(delay)
+        # Process packets
+        for packet in radio.get_packets():
+            print (packet)
+        time.sleep(1)
