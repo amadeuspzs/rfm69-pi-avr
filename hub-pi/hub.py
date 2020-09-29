@@ -1,11 +1,9 @@
 from RFM69 import Radio, FREQ_433MHZ
 import paho.mqtt.publish as publish
-import datetime
 import time
 
 node_id = 1
 network_id = 1
-topic="bantam/door"
 #encryptKey = "sampleEncryptKey"
 
 def processPacket(packet):
