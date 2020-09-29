@@ -1,6 +1,5 @@
 from RFM69 import Radio, FREQ_433MHZ
 import paho.mqtt.publish as publish
-import datetime
 import time
 
 node_id = 1
