@@ -4,7 +4,6 @@ import time
 
 node_id = 1
 network_id = 1
-topic="bantam/door"
 #encryptKey = "sampleEncryptKey"
 
 def processPacket(packet):
