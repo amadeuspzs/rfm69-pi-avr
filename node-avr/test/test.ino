@@ -8,8 +8,11 @@
 #define FREQUENCY     RF69_433MHZ
 //#define ENCRYPTKEY    "sampleEncryptKey" //has to be same 16 characters/bytes on all nodes, not more not less!
 //#define IS_RFM69HW_HCW  //uncomment only for RFM69HW/HCW! Leave out if you have RFM69W/CW!
-#define ENABLE_ATC    //comment out this line to disable AUTO TRANSMISSION CONTROL
-#define SERIAL_BAUD 115200
+//#define ENABLE_ATC    //comment out this line to disable AUTO TRANSMISSION CONTROL
+//#define ATC_RSSI      -80 // target RSSI (dBm)
+#define SERIAL_BAUD 9600
+
+#define debug false
 
 #ifdef ENABLE_ATC
   RFM69_ATC radio;
@@ -28,30 +31,33 @@ typedef struct {
 Payload theData;
 
 void setup() {
-  Serial.begin(SERIAL_BAUD);
+  if (debug) Serial.begin(SERIAL_BAUD);
   radio.initialize(FREQUENCY,NODEID,NETWORKID);
-#ifdef IS_RFM69HW_HCW
-  radio.setHighPower(); //must include this only for RFM69HW/HCW!
-#endif
+  #ifdef IS_RFM69HW_HCW
+    radio.setHighPower(); //must include this only for RFM69HW/HCW!
+  #endif
+  #ifdef ENABLE_ATC
+    radio.enableAutoPower(ATC_RSSI); // set the target RSSI
+  #endif
   //radio.encrypt(ENCRYPTKEY);
-  Serial.print("Transmitting at ");
-  Serial.print(FREQUENCY==RF69_433MHZ ? 433 : FREQUENCY==RF69_868MHZ ? 868 : 915);
-  Serial.println(" MHz");
+  if (debug) Serial.print("Transmitting at ");
+  if (debug) Serial.print(FREQUENCY==RF69_433MHZ ? 433 : FREQUENCY==RF69_868MHZ ? 868 : 915);
+  if (debug) Serial.println(" MHz");
 }
 
 void loop() {
   theData.state = (theData.state == 0) ? 1 : 0;
   
-  Serial.print("Sending struct (");
-  Serial.print(sizeof(theData));
-  Serial.print(" bytes): ");
-  Serial.print(theData.state);
-  Serial.print(" ... ");
+  if (debug) Serial.print("Sending struct (");
+  if (debug) Serial.print(sizeof(theData));
+  if (debug) Serial.print(" bytes): ");
+  if (debug) Serial.print(theData.state);
+  if (debug) Serial.print(" ... ");
   if (radio.sendWithRetry(GATEWAYID, (const void*)(&theData), sizeof(theData), numRetries, timeout)) {
-    Serial.print(" ok!");
+    if (debug) Serial.print(" ok!");
   } else { 
-    Serial.print(" nothing...");
+    if (debug) Serial.print(" nothing...");
   }
   delay(TRANSMITPERIOD);
-  Serial.println();
+  if (debug) Serial.println();
 }
