@@ -32,6 +32,8 @@ typedef struct {
 } Payload;
 Payload theData;
 
+int sensor = 5;
+
 void setup() {
   Serial.begin(SERIAL_BAUD);
   radio.initialize(FREQUENCY,NODEID,NETWORKID);
@@ -42,10 +44,13 @@ void setup() {
   Serial.print("Transmitting at ");
   Serial.print(FREQUENCY==RF69_433MHZ ? 433 : FREQUENCY==RF69_868MHZ ? 868 : 915);
   Serial.println(" MHz");
+  pinMode(sensor,INPUT);
 }
 
 void loop() {  
-  theData.state = true;
+  theData.state = digitalRead(sensor) == HIGH;
+  Serial.print("State: ");
+  Serial.println(theData.state);
   Serial.print("Sending struct (");
   Serial.print(sizeof(theData));
   Serial.print(" bytes) ... ");
