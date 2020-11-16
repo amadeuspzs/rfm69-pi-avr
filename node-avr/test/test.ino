@@ -17,9 +17,10 @@
   RFM69 radio;
 #endif
 
+int numRetries = 3; // default is 2
+int timeout = 100; // ms to wait for ACK, default is 30
+
 int TRANSMITPERIOD = 5000; //transmit a packet to gateway so often (in ms)
-byte sendSize=0;
-boolean requestACK = true;
 
 typedef struct {
   bool state;
@@ -43,8 +44,10 @@ void loop() {
   
   Serial.print("Sending struct (");
   Serial.print(sizeof(theData));
-  Serial.print(" bytes) ... ");
-  if (radio.sendWithRetry(GATEWAYID, (const void*)(&theData), sizeof(theData))) {
+  Serial.print(" bytes): ");
+  Serial.print(theData.state);
+  Serial.print(" ... ");
+  if (radio.sendWithRetry(GATEWAYID, (const void*)(&theData), sizeof(theData), numRetries, timeout)) {
     Serial.print(" ok!");
   } else { 
     Serial.print(" nothing...");
