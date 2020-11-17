@@ -1,3 +1,4 @@
+#define debug true
 #include <RFM69.h>         //get it here: https://github.com/amadeuspzs/RFM69
 #include <RFM69_ATC.h>     //get it here: https://github.com/amadeuspzs/RFM69
 #include <SPI.h>           //included with Arduino IDE install (www.arduino.cc)
@@ -8,11 +9,9 @@
 #define FREQUENCY     RF69_433MHZ
 //#define ENCRYPTKEY    "sampleEncryptKey" //has to be same 16 characters/bytes on all nodes, not more not less!
 //#define IS_RFM69HW_HCW  //uncomment only for RFM69HW/HCW! Leave out if you have RFM69W/CW!
-//#define ENABLE_ATC    //comment out this line to disable AUTO TRANSMISSION CONTROL
-//#define ATC_RSSI      -80 // target RSSI (dBm)
+#define ENABLE_ATC    //comment out this line to disable AUTO TRANSMISSION CONTROL
+#define ATC_RSSI      -80 // target RSSI (dBm)
 #define SERIAL_BAUD 9600
-
-#define debug false
 
 #ifdef ENABLE_ATC
   RFM69_ATC radio;
@@ -21,7 +20,7 @@
 #endif
 
 int numRetries = 3; // default is 2
-int timeout = 100; // ms to wait for ACK, default is 30
+int timeout = 255; // ms to wait for ACK, default is 30
 
 int TRANSMITPERIOD = 5000; //transmit a packet to gateway so often (in ms)
 
