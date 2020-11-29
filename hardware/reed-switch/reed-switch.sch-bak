@@ -1,0 +1,78 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L power:GND #PWR05
+U 1 1 5FC7E839
+P 5600 3850
+F 0 "#PWR05" H 5600 3600 50  0001 C CNN
+F 1 "GND" H 5605 3677 50  0000 C CNN
+F 2 "" H 5600 3850 50  0001 C CNN
+F 3 "" H 5600 3850 50  0001 C CNN
+	1    5600 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C3
+U 1 1 5FC7E845
+P 5600 3550
+F 0 "C3" H 5718 3596 50  0000 L CNN
+F 1 "47uF" H 5718 3505 50  0000 L CNN
+F 2 "" H 5638 3400 50  0001 C CNN
+F 3 "~" H 5600 3550 50  0001 C CNN
+	1    5600 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 5FC7E84B
+P 6000 3750
+F 0 "R4" V 5793 3750 50  0000 C CNN
+F 1 "10K" V 5884 3750 50  0000 C CNN
+F 2 "" V 5930 3750 50  0001 C CNN
+F 3 "~" H 6000 3750 50  0001 C CNN
+	1    6000 3750
+	0    1    1    0   
+$EndComp
+$Comp
+L Switch:SW_Reed SW1
+U 1 1 5FC7E851
+P 6300 3550
+F 0 "SW1" V 6254 3635 50  0000 L CNN
+F 1 "SW_Reed" V 6345 3635 50  0000 L CNN
+F 2 "" H 6300 3550 50  0001 C CNN
+F 3 "~" H 6300 3550 50  0001 C CNN
+	1    6300 3550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5600 3700 5600 3750
+Wire Wire Line
+	5850 3750 5600 3750
+Connection ~ 5600 3750
+Wire Wire Line
+	5600 3750 5600 3850
+Wire Wire Line
+	6150 3750 6300 3750
+Wire Wire Line
+	6300 3350 5600 3350
+Wire Wire Line
+	5600 3350 5600 3400
+Text GLabel 6700 3350 2    50   Input ~ 0
+sensor
+Wire Wire Line
+	6300 3350 6700 3350
+Connection ~ 6300 3350
+$EndSCHEMATC
