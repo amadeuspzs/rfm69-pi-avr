@@ -1,0 +1,160 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L RF_Module:RFM69HW U1
+U 1 1 605EF018
+P 3280 2990
+F 0 "U1" H 3280 3671 50  0000 C CNN
+F 1 "RFM69HW" H 3280 3580 50  0000 C CNN
+F 2 "RF_Module:HOPERF_RFM69HW" H 3280 2390 50  0001 C CNN
+F 3 "https://www.hoperf.com/data/upload/portal/20181127/5bfcbb56f1fd7.pdf" H 3280 2690 50  0001 C CNN
+	1    3280 2990
+	1    0    0    -1  
+$EndComp
+$Comp
+L User_Library_ANT:73391-0060 J1
+U 1 1 605F11E4
+P 4400 3490
+F 0 "J1" H 4180 3437 50  0000 R CNN
+F 1 "73391-0060" H 4180 3528 50  0000 R CNN
+F 2 "User_Library:MOLEX_73391-0060" H 4400 3490 50  0001 L BNN
+F 3 "" H 4400 3490 50  0001 L BNN
+F 4 "Molex" H 4400 3490 50  0001 L BNN "MANUFACTURER"
+	1    4400 3490
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x07_Counter_Clockwise J2
+U 1 1 605F7C81
+P 2000 2980
+F 0 "J2" H 2050 3497 50  0000 C CNN
+F 1 "RPi 17-26" H 2050 3406 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x07_P2.54mm_Vertical" H 2000 2980 50  0001 C CNN
+F 3 "~" H 2000 2980 50  0001 C CNN
+	1    2000 2980
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1800 2680 1800 2490
+Wire Wire Line
+	1800 2490 3280 2490
+Wire Wire Line
+	1800 2780 1700 2780
+Wire Wire Line
+	1700 2780 1700 2400
+Wire Wire Line
+	1700 2400 2600 2400
+Wire Wire Line
+	2600 2400 2600 2890
+Wire Wire Line
+	2600 2890 2780 2890
+Wire Wire Line
+	1800 2880 1590 2880
+Wire Wire Line
+	1590 2880 1590 2300
+Wire Wire Line
+	1590 2300 2500 2300
+Wire Wire Line
+	2500 2300 2500 2790
+Wire Wire Line
+	2500 2790 2780 2790
+Wire Wire Line
+	1800 2980 1490 2980
+Wire Wire Line
+	1490 2980 1490 2190
+Wire Wire Line
+	1490 2190 2780 2190
+Wire Wire Line
+	2780 2190 2780 2690
+Wire Wire Line
+	1800 3280 1800 3450
+Wire Wire Line
+	1800 3450 2700 3450
+Wire Wire Line
+	2700 3450 2700 3190
+Wire Wire Line
+	2700 3190 2780 3190
+Wire Wire Line
+	1800 3080 1670 3080
+Wire Wire Line
+	1670 3080 1670 3580
+Wire Wire Line
+	1670 3580 2380 3580
+Wire Wire Line
+	3380 3580 3380 3490
+Wire Wire Line
+	4300 3390 3890 3390
+Wire Wire Line
+	3890 3390 3890 3580
+Wire Wire Line
+	3890 3580 3380 3580
+Connection ~ 3380 3580
+Wire Wire Line
+	3780 2690 4200 2690
+Wire Wire Line
+	4200 2690 4200 3590
+Wire Wire Line
+	4200 3590 4300 3590
+Wire Wire Line
+	2300 2680 2460 2680
+Wire Wire Line
+	2460 2680 2460 3080
+Wire Wire Line
+	2460 3080 3450 3080
+Wire Wire Line
+	3450 3080 3450 2790
+Wire Wire Line
+	3450 2790 3780 2790
+Wire Wire Line
+	2300 2980 2780 2980
+Wire Wire Line
+	2780 2980 2780 2990
+NoConn ~ 3780 2890
+NoConn ~ 3780 2990
+NoConn ~ 3780 3090
+NoConn ~ 3780 3190
+NoConn ~ 3780 3290
+NoConn ~ 2300 2880
+NoConn ~ 2300 3080
+NoConn ~ 2300 3180
+NoConn ~ 1800 3180
+$Comp
+L power:GND #PWR0101
+U 1 1 6062219C
+P 3200 3580
+F 0 "#PWR0101" H 3200 3330 50  0001 C CNN
+F 1 "GND" H 3205 3407 50  0000 C CNN
+F 2 "" H 3200 3580 50  0001 C CNN
+F 3 "" H 3200 3580 50  0001 C CNN
+	1    3200 3580
+	1    0    0    -1  
+$EndComp
+Connection ~ 3200 3580
+Wire Wire Line
+	3200 3580 3380 3580
+Wire Wire Line
+	2300 2780 2380 2780
+Wire Wire Line
+	2380 2780 2380 3280
+Connection ~ 2380 3580
+Wire Wire Line
+	2380 3580 3200 3580
+Wire Wire Line
+	2300 3280 2380 3280
+Connection ~ 2380 3280
+Wire Wire Line
+	2380 3280 2380 3580
+$EndSCHEMATC
