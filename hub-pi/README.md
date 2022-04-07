@@ -1,3 +1,6 @@
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![Python Version](https://img.shields.io/badge/Python-3.7.5-blue.svg)
+
 # Raspberry Pi MQTT Hub
 
 RFM69 <> Raspberry Pi <> MQTT Server
