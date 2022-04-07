@@ -1,3 +1,5 @@
+known_senders = [ 2 ]
+
 def processPacket(packet):
         """ Maps incoming packets to MQTT payloads
 
@@ -5,7 +7,7 @@ def processPacket(packet):
                 packet (packet): a single incoming packet
 
         Returns:
-                (dict): mapped topic:payload
+                (array (dict)): mapped topic:payload with rssi
 
 	"""
 
@@ -15,4 +17,4 @@ def processPacket(packet):
                 state = packet.data[0]
                 payload = state
 
-        return { "topic": topic, "payload": payload}
+        return [{ "topic": topic, "payload": payload}, {"topic": topic + "/rssi", "payload": packet.RSSI }]
