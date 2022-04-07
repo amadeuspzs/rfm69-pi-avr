@@ -10,7 +10,7 @@ RFM69 <> Raspberry Pi <> MQTT Server
 ## Installation
 
 1. Setup a virtual environment e.g. `virtualenv hub`
-2. Activate your virtual environment and install requirements: `pip install -r requirements.xtx`
+2. Activate your virtual environment and install requirements: `pip install -r requirements.txt`
 
 ## Configuration
 
