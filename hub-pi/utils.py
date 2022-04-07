@@ -1,4 +1,5 @@
-known_senders = [2]
+# senders are defined with integer values, enter your known senders below with a nickname for debugging
+known_senders = {2: "ping"}
 
 
 def processPacket(packet):
@@ -19,6 +20,6 @@ def processPacket(packet):
         payload = state
 
     return [
-        {"topic": topic, "payload": payload},
-        {"topic": topic + "/rssi", "payload": packet.RSSI},
+        {"topic": topic, "payload": payload, "retain": True},
+        {"topic": topic + "/rssi", "payload": packet.RSSI, "retain": True},
     ]

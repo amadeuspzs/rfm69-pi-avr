@@ -22,25 +22,22 @@ with Radio(FREQ_433MHZ, node_id, network_id, isHighPower=True, verbose=debug) as
     while True:
         if radio.has_received_packet():
             for packet in radio.get_packets():
-                if packet.sender in known_senders:
+                if packet.sender in list(known_senders.keys()):
+                    print(f"Processing {known_senders[packet.sender]}")
                     # extract mqtt payload from packet
                     data = processPacket(packet)
                     print("Publishing to MQTT...")
-                    for messages in data:
-                        publish.single(
-                            messages["topic"],
-                            payload=messages["payload"],
-                            qos=0,
-                            retain=True,
-                            hostname=hostname,
-                            port=port,
-                            client_id=client_id,
-                            keepalive=60,
-                            will=None,
-                            auth=None,
-                            tls=None,
-                            transport="tcp",
-                        )
+                    publish.multiple(
+                        data,
+                        hostname=hostname,
+                        port=port,
+                        client_id=client_id,
+                        keepalive=60,
+                        will=None,
+                        auth=None,
+                        tls=None,
+                        transport="tcp",
+                    )
                 else:
                     print("Unknown sender: ", packet)
         time.sleep(1)  # seconds
