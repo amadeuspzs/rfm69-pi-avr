@@ -23,10 +23,11 @@ with Radio(FREQ_433MHZ, node_id, network_id, isHighPower=True, verbose=debug) as
         if radio.has_received_packet():
             for packet in radio.get_packets():
                 if packet.sender in list(known_senders.keys()):
-                    print(f"Processing {known_senders[packet.sender]}")
+                    print(f"Processing {known_senders[packet.sender]}...")
                     # extract mqtt payload from packet
                     data = processPacket(packet)
                     print("Publishing to MQTT...")
+                    # publish payload and its RSSI value
                     publish.multiple(
                         data,
                         hostname=hostname,

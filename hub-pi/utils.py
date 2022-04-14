@@ -1,5 +1,7 @@
+import struct
+
 # senders are defined with integer values, enter your known senders below with a nickname for debugging
-known_senders = {2: "ping"}
+known_senders = {2: "ping", 3: "reservoir"}
 
 
 def processPacket(packet):
@@ -18,6 +20,11 @@ def processPacket(packet):
         topic = "radio/ping"
         state = packet.data[0]
         payload = state
+    elif packet.sender == 3:
+        # water reservoir
+        topic = "reservoir/level"
+        distance = struct.unpack("f",bytes(packet.data))[0]
+        payload = distance
 
     return [
         {"topic": topic, "payload": payload, "retain": True},
