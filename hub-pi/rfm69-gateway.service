@@ -7,7 +7,7 @@ Wants=network-online.target
 Type=simple
 User=dietpi
 WorkingDirectory=/home/dietpi/rfm69-pi-avr/hub-pi
-ExecStart=/home/dietpi/rfm69-pi-avr/hub-pi/venv/bin/python3 gateway.py --log-file /var/log/rfm69-gateway.log
+ExecStart=/home/dietpi/rfm69-pi-avr/hub-pi/venv/bin/python hub.py --log-level=DEBUG
 Restart=on-failure
 RestartSec=10
 ExecStartPre=/bin/sleep 5

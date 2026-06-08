@@ -20,6 +20,7 @@ import time
 
 import paho.mqtt.client as mqtt
 from RFM69 import Radio, FREQ_433MHZ
+from parsers import parse_packet
 
 # --- defaults ---
 DEFAULT_LOG_FILE  = "/var/log/rfm69-gateway.log"
@@ -86,46 +87,6 @@ def smoketest_radio():
         log.error("Smoketest: failed to communicate with RFM69 module: %s", e)
         log.error("Check: SPI enabled, wiring, and that no other process is using the radio")
         return False
-
-
-# ---------------------------------------------------------------------------
-# Packet parsing
-# ---------------------------------------------------------------------------
-
-def parse_packet(packet):
-    """Returns list of (topic, payload, retain) tuples, or empty list on error."""
-    log    = logging.getLogger(__name__)
-    sender = packet.sender
-    rssi   = packet.RSSI
-    data   = bytes(packet.data)
-
-    try:
-        if sender == 2:
-            # ping node: single byte state
-            state = data[0]
-            return [
-                ("radio/ping",      state, True),
-                ("radio/ping/rssi", rssi,  True),
-            ]
-
-        elif sender == 3:
-            # reservoir node: struct { float cm; float tempC; }
-            if len(data) < 8:
-                log.error("Reservoir packet too short: %d bytes, raw: %s", len(data), data.hex())
-                return []
-            cm, temp_c = struct.unpack("ff", data[:8])
-            return [
-                ("reservoir/level",      round(cm, 1),     True),
-                ("reservoir/temp",       round(temp_c, 1), True),
-                ("reservoir/level/rssi", rssi,             True),
-            ]
-
-    except struct.error as e:
-        log.error("Failed to unpack packet from sender %d: %s | raw: %s", sender, e, data.hex())
-        return []
-
-    log.warning("Unknown sender %d, raw: %s", sender, data.hex())
-    return []
 
 
 # ---------------------------------------------------------------------------
