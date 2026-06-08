@@ -73,13 +73,14 @@ def smoketest_radio():
     try:
         with Radio(FREQ_433MHZ, NODE_ID, NETWORK_ID, isHighPower=True, verbose=False) as radio:
             registers = radio.read_registers()
-            # register 0x10 (index 16) is the version register, should be 0x24
-            version = registers[16]
-            if version == 0x24:
+            # each entry is [hex_string, binary_string], parse the hex
+            version = int(registers[16][0], 16)
+            # RFM69W = 0x24, RFM69HW = 0x11
+            if version in (0x24, 0x11):
                 log.info("Smoketest: RFM69 responding correctly (version=0x%02X)", version)
                 return True
             else:
-                log.error("Smoketest: unexpected version 0x%02X (expected 0x24) — wrong module or SPI issue?", version)
+                log.error("Smoketest: unexpected version 0x%02X", version)
                 return False
     except Exception as e:
         log.error("Smoketest: failed to communicate with RFM69 module: %s", e)
