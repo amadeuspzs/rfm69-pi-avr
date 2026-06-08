@@ -133,14 +133,16 @@ def parse_packet(packet):
 # ---------------------------------------------------------------------------
 
 def on_connect(client, userdata, flags, reason_code, properties):
+    logger = logging.getLogger(__name__)
     if reason_code == 0:
-        log.info("MQTT connected to %s:%s", MQTT_HOST, MQTT_PORT)
+        logger.info("MQTT connected to %s:%s", MQTT_HOST, MQTT_PORT)
     else:
-        log.error("MQTT connection failed, reason=%s", reason_code)
+        logger.error("MQTT connection failed, reason=%s", reason_code)
 
 def on_disconnect(client, userdata, flags, reason_code, properties):
+    logger = logging.getLogger(__name__)
     if reason_code != 0:
-        log.warning("MQTT unexpected disconnect reason=%s — will reconnect", reason_code)
+        logger.warning("MQTT unexpected disconnect reason=%s — will reconnect", reason_code)
 
 # ---------------------------------------------------------------------------
 # Main

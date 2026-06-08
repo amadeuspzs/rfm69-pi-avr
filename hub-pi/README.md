@@ -49,7 +49,7 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Edit the constants at the top of `gateway.py`:
+Edit the constants at the top of `hub.py`:
 
 | Variable | Default | Description |
 |---|---|---|
@@ -67,19 +67,19 @@ Edit the constants at the top of `gateway.py`:
 source venv/bin/activate
 
 # default log file (/var/log/rfm69-gateway.log) + stdout
-python3 gateway.py
+python3 hub.py
 
 # custom log file
-python3 gateway.py --log-file /tmp/test.log
+python3 hub.py --log-file /tmp/test.log
 
 # stdout only, no file
-python3 gateway.py --no-log-file
+python3 hub.py --no-log-file
 
 # verbose debug output
-python3 gateway.py --log-level DEBUG
+python3 hub.py --log-level DEBUG
 
 # skip hardware smoketest (e.g. if radio is known good)
-python3 gateway.py --skip-smoketest
+python3 hub.py --skip-smoketest
 ```
 
 ### As a systemd service
@@ -153,6 +153,6 @@ To bypass: `--skip-smoketest`
 
 ## Adding a new node
 
-1. Add the node ID and nickname to `SENDERS` in `gateway.py`
+1. Add the node ID and nickname to `SENDERS` in `hub.py`
 2. Add a new `elif sender == N:` block in `parse_packet()` matching the Arduino payload struct
 3. Return a list of `(topic, payload, retain)` tuples
