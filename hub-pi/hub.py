@@ -185,6 +185,7 @@ def main():
     log = setup_logging(log_file, args.log_level)
 
     log.info("RFM69 gateway starting")
+    log.info("Log level: %s", args.log_level.upper())
     if log_file:
         log.info("Logging to %s", log_file)
 

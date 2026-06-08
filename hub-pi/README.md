@@ -15,7 +15,7 @@ Built for a Raspberry Pi running DietPi with an RFM69 HAT at 433MHz.
 ### System packages
 
 ```bash
-sudo apt install python3 python3-venv python3-pip
+sudo apt install python3 python3-venv python3-pip gcc python3-dev
 ```
 
 ### Log file
