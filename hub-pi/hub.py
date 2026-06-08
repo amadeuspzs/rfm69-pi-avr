@@ -68,26 +68,22 @@ def setup_logging(log_file, log_level):
 # ---------------------------------------------------------------------------
 
 def smoketest_radio():
-    """Try to initialise the radio briefly to confirm the hardware is present.
-    Returns True if the radio responds, False otherwise."""
     log = logging.getLogger(__name__)
     log.info("Smoketest: checking RFM69 module...")
     try:
         with Radio(FREQ_433MHZ, NODE_ID, NETWORK_ID, isHighPower=True, verbose=False) as radio:
-            # Read the version register (0x10) - RFM69 should return 0x24
-            version = radio.spi.get_register(0x10)
+            registers = radio.read_registers()
+            # register 0x10 (index 16) is the version register, should be 0x24
+            version = registers[16]
             if version == 0x24:
-                log.info("Smoketest: RFM69 responded correctly (version=0x%02X)", version)
+                log.info("Smoketest: RFM69 responding correctly (version=0x%02X)", version)
                 return True
             else:
-                log.error(
-                    "Smoketest: unexpected version register value 0x%02X "
-                    "(expected 0x24) — wrong module or SPI wiring issue?", version
-                )
+                log.error("Smoketest: unexpected version 0x%02X (expected 0x24) — wrong module or SPI issue?", version)
                 return False
     except Exception as e:
         log.error("Smoketest: failed to communicate with RFM69 module: %s", e)
-        log.error("Check: SPI enabled (raspi-config), wiring, and that no other process is using the radio")
+        log.error("Check: SPI enabled, wiring, and that no other process is using the radio")
         return False
 
 

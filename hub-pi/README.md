@@ -15,7 +15,7 @@ Built for a Raspberry Pi running DietPi with an RFM69 HAT at 433MHz.
 ### System packages
 
 ```bash
-sudo apt install python3 python3-venv python3-pip gcc python3-dev
+sudo apt install python3 python3-venv python3-pip gcc python3-dev swig liblgpio-dev
 ```
 
 ### Log file
@@ -29,6 +29,7 @@ sudo chown dietpi:dietpi /var/log/rfm69-gateway.log
 
 ```bash
 sudo usermod -aG spi dietpi
+sudo usermod -aG gpio dietpi
 ```
 
 ## Installation
