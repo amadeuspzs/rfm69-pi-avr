@@ -167,7 +167,7 @@ def parse_args():
     )
     parser.add_argument(
         "--log-level",
-        default=DEFAULT_LOG_LEVEL,
+        default=os.environ.get("LOG_LEVEL", DEFAULT_LOG_LEVEL).upper(),
         choices=["DEBUG", "INFO", "WARNING", "ERROR"],
         help=f"Log level (default: {DEFAULT_LOG_LEVEL})",
     )
