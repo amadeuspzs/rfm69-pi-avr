@@ -25,6 +25,12 @@ sudo touch /var/log/rfm69-gateway.log
 sudo chown dietpi:dietpi /var/log/rfm69-gateway.log
 ```
 
+### SPI permissions
+
+```bash
+sudo usermod -aG spi dietpi
+```
+
 ## Installation
 
 ```bash

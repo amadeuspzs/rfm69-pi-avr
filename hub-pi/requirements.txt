@@ -1,2 +1,3 @@
 rpi-rfm69>=0.7.0
 paho-mqtt>=1.6.0
+swig>=0.6.0
