@@ -132,18 +132,15 @@ def parse_packet(packet):
 # MQTT callbacks
 # ---------------------------------------------------------------------------
 
-def on_connect(client, userdata, flags, rc):
-    log = logging.getLogger(__name__)
-    if rc == 0:
+def on_connect(client, userdata, flags, reason_code, properties):
+    if reason_code == 0:
         log.info("MQTT connected to %s:%s", MQTT_HOST, MQTT_PORT)
     else:
-        log.error("MQTT connection failed, rc=%d", rc)
+        log.error("MQTT connection failed, reason=%s", reason_code)
 
-def on_disconnect(client, userdata, rc):
-    log = logging.getLogger(__name__)
-    if rc != 0:
-        log.warning("MQTT unexpected disconnect rc=%d — will reconnect", rc)
-
+def on_disconnect(client, userdata, flags, reason_code, properties):
+    if reason_code != 0:
+        log.warning("MQTT unexpected disconnect reason=%s — will reconnect", reason_code)
 
 # ---------------------------------------------------------------------------
 # Main
@@ -193,7 +190,7 @@ def main():
             sys.exit(1)
 
     # MQTT setup
-    mqttc = mqtt.Client(client_id=MQTT_CLIENT)
+    mqttc = mqtt.Client(client_id=MQTT_CLIENT, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
     mqttc.on_connect    = on_connect
     mqttc.on_disconnect = on_disconnect
     mqttc.connect(MQTT_HOST, MQTT_PORT, keepalive=60)
