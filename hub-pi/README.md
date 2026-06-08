@@ -15,7 +15,7 @@ Built for a Raspberry Pi running DietPi with an RFM69 HAT at 433MHz.
 ### System packages
 
 ```bash
-sudo apt install python3 python3-venv python3-pip gcc python3-dev swig liblgpio-dev
+sudo apt install python3 python3-venv python3-pip gcc python3-dev swig liblgpio-dev logrotate cron
 ```
 
 ### Log file
@@ -153,6 +153,6 @@ To bypass: `--skip-smoketest`
 
 ## Adding a new node
 
-1. Add the node ID and nickname to `SENDERS` in `hub.py`
+1. Add the node ID and nickname to `SENDERS` in `parsers.py`
 2. Add a new `elif sender == N:` block in `parse_packet()` matching the Arduino payload struct
 3. Return a list of `(topic, payload, retain)` tuples
