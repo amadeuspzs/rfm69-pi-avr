@@ -107,11 +107,12 @@ sudo nano /etc/logrotate.d/rfm69-gateway
 
 ```
 /var/log/rfm69-gateway.log {
-    weekly
-    rotate 4
+    size 10M
+    rotate 1
     compress
     missingok
     notifempty
+    create 0664 dietpi dietpi
     postrotate
         systemctl restart rfm69-gateway
     endscript
