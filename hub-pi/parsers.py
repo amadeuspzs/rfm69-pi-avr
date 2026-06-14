@@ -38,7 +38,7 @@ def parse_reservoir(data, rssi):
         return [
             ("reservoir/level",      round(cm, 1),     True),
             ("reservoir/temp",       round(temp_c, 1), True),
-            ("reservoir/level/rssi", rssi,             True),
+            ("reservoir/rssi",       rssi,             True),
         ]
     except struct.error as e:
         log.error("Failed to unpack reservoir packet: %s | raw: %s", e, data.hex())

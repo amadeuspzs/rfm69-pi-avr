@@ -170,7 +170,7 @@ def main():
     signal.signal(signal.SIGTERM, shutdown)
 
     log.info("Attaching to radio...")
-    with Radio(FREQ_433MHZ, NODE_ID, NETWORK_ID, isHighPower=True, verbose=False) as radio:
+    with Radio(FREQ_433MHZ, NODE_ID, NETWORK_ID, isHighPower=True, verbose=False, enableATC=True) as radio:
         log.info("Listening for packets")
         while True:
             if radio.has_received_packet():
