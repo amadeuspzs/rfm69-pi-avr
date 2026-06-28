@@ -1,4 +1,4 @@
-"""
+are"""
 Packet parsers for each known RFM69 node.
 
 To add a new node:
@@ -44,7 +44,7 @@ def parse_reservoir(data, rssi):
         # 'f' = temperature_c (4 bytes)
         # 'f' = adcRatio (4 bytes)
         # '?' = heartbeat (1 byte)
-        cm, temp_c, adc_ratio, heartbeat = struct.unpack("<ffff?", data[:13])
+        cm, temp_c, adc_ratio, heartbeat = struct.unpack("<fff?", data[:13])
 
         # Always publish your connection metrics
         updates = [
