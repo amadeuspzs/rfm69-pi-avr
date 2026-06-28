@@ -30,9 +30,9 @@ def parse_ping(data, rssi):
 
 
 def parse_reservoir(data, rssi):
-    """Node 3 — water reservoir: struct { float cm; float tempC; bool heartbeat; }"""
-    # 4 bytes for float + 4 for float + 1 for bool = 9 bytes on AVR
-    if len(data) < 9:
+    """Node 3 — water reservoir: struct { float cm; float tempC; float adcRatio; bool heartbeat; }"""
+    # 4 bytes for float + 4 for float + 4 for float + 1 for bool = 13 bytes on AVR
+    if len(data) < 13:
         log.error(
             "Reservoir packet too short: %d bytes, raw: %s", len(data), data.hex()
         )
@@ -42,20 +42,25 @@ def parse_reservoir(data, rssi):
         # '<' = little-endian
         # 'f' = distance_cm (4 bytes)
         # 'f' = temperature_c (4 bytes)
+        # 'f' = adcRatio (4 bytes)
         # '?' = heartbeat (1 byte)
-        cm, temp_c, heartbeat = struct.unpack("<ff?", data[:9])
+        cm, temp_c, adc_ratio, heartbeat = struct.unpack("<ffff?", data[:13])
 
         # Always publish your connection metrics
         updates = [
             ("reservoir/heartbeat", heartbeat, True),
             ("reservoir/rssi", rssi, True),
+            ("reservoir/adc_ratio", round(adc_ratio, 3), True),
         ]
 
         # Only append sensor metrics if they are valid numbers.
         # This prevents publishing 'nan' to MQTT, meaning Home Assistant
         # (or your database) simply retains the last known good measurement.
         if not math.isnan(cm):
-            updates.append(("reservoir/level", round(cm, 1), True))
+            if cm < 30:
+                log.info(f"Skipping low measurement {cm}")
+            else:
+                updates.append(("reservoir/level", round(cm, 1), True))
 
         if not math.isnan(temp_c):
             updates.append(("reservoir/temp", round(temp_c, 1), True))
