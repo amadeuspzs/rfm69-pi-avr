@@ -1,4 +1,4 @@
-are"""
+"""
 Packet parsers for each known RFM69 node.
 
 To add a new node:
